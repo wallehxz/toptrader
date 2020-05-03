@@ -35,5 +35,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/webhooks/cache_balances',  to: "webhooks#cache_balances"
+  get '/webhooks/risk_notice',     to: "webhooks#risk_notice"
+
   # https://doc.bccnsoft.com/docs/rails-guides-4.1-cn/routing.html
 end
