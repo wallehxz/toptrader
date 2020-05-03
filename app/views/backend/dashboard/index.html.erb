@@ -1,0 +1,88 @@
+<section class="content">
+
+  <div class="row">
+    <div class="col-lg-3 col-xs-6">
+      <div class="small-box bg-aqua" style="height: 150px">
+        <div class="inner">
+          <h3>$ <%= current_user.current_balance&.to_i %></h3>
+          <h4>资产估值</h4>
+        </div>
+        <div class="icon" style="margin-top: 15px">
+          <i class="ion ion-bag"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-6">
+      <div class="small-box bg-green" style="height: 150px">
+        <div class="inner">
+          <h3><%= current_user.risk_coercion&.daily_loss %></h3>
+          <h4>日风控预警</h4>
+        </div>
+        <div class="icon" style="margin-top: 15px">
+          <i class="ion ion-stats-bars"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-6">
+      <div class="small-box bg-yellow" style="height: 150px">
+        <div class="inner">
+          <h3><%= current_user.risk_coercion&.week_loss %></h3>
+          <h4>周风控预警</h4>
+        </div>
+        <div class="icon" style="margin-top: 15px">
+          <i class="ion ion-person-add"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-6">
+      <div class="small-box bg-red" style="height: 150px">
+        <div class="inner">
+          <h3>65</h3>
+          <p>Unique Visitors</p>
+        </div>
+        <div class="icon" style="margin-top: 15px">
+          <i class="ion ion-pie-graph"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="content">
+      <div class="box box-primary">
+        <div class="box-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                <thead>
+                <tr>
+                  <th tabindex="0" aria-controls="example1" style="text-align: center">日期</th>
+                  <th tabindex="0" aria-controls="example1" style="text-align: center">次数</th>
+                  <th tabindex="0" aria-controls="example1" style="text-align: center">平均盈利</th>
+                  <th tabindex="0" aria-controls="example1" style="text-align: center">平均亏损</th>
+                  <th tabindex="0" aria-controls="example1" style="text-align: center">赚赔比</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @evaluates.each do |item| %>
+                  <tr style="text-align: center; color: black;">
+                    <td><%= item[:day] %> </td>
+                    <td><%= item[:count] %></td>
+                    <td><%= item[:ave_gain].round(2) %></td>
+                    <td><%= item[:ave_deficit].round(2) %></td>
+                    <td><%= item[:ratio] %></td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</section>

@@ -1,0 +1,64 @@
+<%= content_for(:title,  '持仓周期 | TopTrader') %>
+<section class="content-header">
+  <h1>
+    市场 <small>持仓周期</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active"><i class="fa fa-exchange"></i> 持仓周期</li>
+  </ol>
+</section>
+<section class="content">
+  <div class="box box-primary">
+    <div class="box-header">
+      <a href="<%= new_backend_position_cycle_path %>" class="btn bg-primary btn-flat"><i class="ion-plus"></i> 新增持仓</a>
+    </div>
+    <div class="box-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+            <thead>
+              <tr>
+                <th tabindex="0" aria-controls="example1" style="text-align: center">Market</th>
+                <th tabindex="0" aria-controls="example1" style="text-align: center">Title</th>
+                <th tabindex="0" aria-controls="example1" style="text-align: center">State</th>
+                <th tabindex="0" aria-controls="example1" style="text-align: center">TurnOver</th>
+                <th tabindex="0" aria-controls="example1" style="text-align: center;width: 240px">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @markets.each do |market| %>
+              <% market.cycles.each do |cycle| %>
+                <tr style="text-align: center">
+                  <td><br>
+                    【<%= market.type %>】<%= market.symbols %>
+                  </td>
+                  <td><br>
+                    <label class="btn bg-black btn-flat" style="font-size: 16px;min-width: 100px">
+                      <%= cycle.title %>
+                    </label>
+                  </td>
+                  <td><br>
+                    <label class="btn bg-black btn-flat" style="font-size: 16px;min-width: 100px">
+                      <%= cycle.state %>
+                    </label>
+                  </td>
+                  <td><br>
+                    <label class="btn bg-black btn-flat" style="font-size: 16px;min-width: 100px">
+                      <%= cycle.orders.count %>
+                    </label>
+                  </td>
+                  <td style="text-align: center;">
+                    <a href="<%= backend_position_cycle_path(cycle) %>" class="btn bg-red btn-flat" data-method="delete" data-confirm="确定删除吗？">
+                      <i class="glyphicon glyphicon-trash"></i>
+                    </a>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

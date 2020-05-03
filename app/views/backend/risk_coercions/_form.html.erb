@@ -1,0 +1,63 @@
+<%= form_for(['backend', @risk_coercion]) do |f| %>
+<div class="box-body">
+  <div class="col-md-5">
+    <div class="form-group has-warning">
+      <label>日预警</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-money"></i>
+        </div>
+        <%= f.text_field :daily_loss, class:'form-control', placeholder:'（必填* 每天亏损预警值）' %>
+      </div>
+      <%= model_errors(@risk_coercion,'daily_loss') %>
+    </div>
+    <div class="form-group has-warning">
+      <label>周预警</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-btc"></i>
+        </div>
+        <%= f.text_field :week_loss, class:'form-control', placeholder:'（必填* 每周亏损预警值）' %>
+      </div>
+      <%= model_errors(@risk_coercion,'week_loss') %>
+    </div>
+    <div class="form-group has-error">
+      <label>日最大亏损比率</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-money"></i>
+        </div>
+        <%= f.text_field :daily_ratio, class:'form-control', placeholder:'（必填* 日最大亏损比率 百分比计算 0.01）' %>
+      </div>
+      <%= model_errors(@risk_coercion,'daily_ratio') %>
+    </div>
+    <div class="form-group has-error">
+      <label>周最大亏损比率</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-money"></i>
+        </div>
+        <%= f.text_field :week_ratio, class:'form-control', placeholder:'（必填* 周最大亏损比率 百分比计算 0.04）' %>
+      </div>
+      <%= model_errors(@risk_coercion,'week_ratio') %>
+    </div>
+    <div class="form-group has-success">
+      <label>Webhook Access Token</label><br><a href="https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq">如何申请钉钉通知机器人</a>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-bell"></i>
+        </div>
+        <%= f.text_field :notice_webhook, class:'form-control', placeholder:'（必填* Webhook token）' %>
+      </div>
+      <%= model_errors(@risk_coercion,'notice_webhook') %>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <hr>
+    <div>
+      <button type="submit" class="btn bg-maroon btn-flat" style="width: 120px">提交</button>
+      <a href="<%= request.referrer %>" class="btn bg-navy btn-flat" style="width: 120px">取消</a>
+    </div>
+  </div>
+</div>
+<% end %>

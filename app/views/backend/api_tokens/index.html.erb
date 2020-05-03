@@ -1,0 +1,67 @@
+<%= content_for(:title,  '市场认证秘钥 | TopTrader') %>
+<section class="content-header">
+  <h1>认证秘钥</h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active"><i class="fa fa-exchange"></i> 秘钥列表</li>
+  </ol>
+</section>
+<section class="content">
+  <div class="box box-primary">
+    <div class="box-header">
+      <a href="<%= new_backend_api_token_path %>" class="btn bg-primary btn-flat"><i class="ion-plus"></i> 添加秘钥</a>
+    </div>
+    <div class="box-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+            <thead>
+            <tr>
+              <th tabindex="0" aria-controls="example1" style="text-align: center">交易所</th>
+              <th tabindex="0" aria-controls="example1" style="text-align: center">KEY</th>
+              <th tabindex="0" aria-controls="example1" style="text-align: center">SECRET</th>
+              <th tabindex="0" aria-controls="example1" style="text-align: center;width: 240px">管理</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @tokens.each do |item| %>
+              <tr style="text-align: center">
+                <td><br>
+                  <label class="btn bg-black btn-flat" style="font-size: 16px">
+                    <i class="fa fa-bank"></i>
+                    <%= item.market.upcase %>
+                  </label>
+                </td>
+                <td><br>
+                  <%= item.key %>
+                </td>
+                <td><br>
+                  <%= item.secret %>
+                </td>
+                <td style="text-align: center">
+                  <a href="<%= edit_backend_api_token_path(item) %>" class="btn bg-orange btn-flat">
+                    <i class="glyphicon glyphicon-edit"></i>
+                  </a>
+                  <a href="<%= backend_api_token_path(item) %>" class="btn bg-red btn-flat" data-method="delete" data-confirm="确定删除吗？">
+                    <i class="glyphicon glyphicon-trash"></i>
+                  </a>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5">
+          <div class="dataTables_info" id="example1_info" role="status" aria-live="polite"><h5>总计：「<%= @tokens.count %>」</h5></div>
+        </div>
+        <div class="col-sm-12">
+          <div class="dataTables_paginate paging_simple_numbers">
+          <%= will_paginate @tokens, :class=>'apple_pagination' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

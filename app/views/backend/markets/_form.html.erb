@@ -1,0 +1,43 @@
+<%= form_for(['backend', @market]) do |f| %>
+<div class="box-body">
+  <div class="col-md-5">
+    <div class="form-group has-success">
+      <label>Base</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-money"></i>
+        </div>
+        <%= f.text_field :base_unit, class:'form-control', placeholder:'（必填* Base Currency）' %>
+      </div>
+      <%= model_errors(@market,'base_unit') %>
+    </div>
+    <div class="form-group has-success">
+      <label>Quote</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-btc"></i>
+        </div>
+        <%= f.text_field :quote_unit, class:'form-control', placeholder:'（必填* Quote Currency）' %>
+      </div>
+      <%= model_errors(@market,'quote_unit') %>
+    </div>
+    <div class="form-group has-success">
+      <label>Exchange</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-cube"></i>
+        </div>
+        <%= f.select(:source, Market.select_lists, {prompt:'选择交易所'}, {:class => 'form-control'}) %>
+      </div>
+      <%= model_errors(@market,'source') %>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <hr>
+    <div>
+      <button type="submit" class="btn bg-maroon btn-flat" style="width: 120px">提交</button>
+      <a href="<%= request.referrer %>" class="btn bg-navy btn-flat" style="width: 120px">取消</a>
+    </div>
+  </div>
+</div>
+<% end %>

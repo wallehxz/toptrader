@@ -1,0 +1,32 @@
+<%= form_for(['backend', @position_cycle]) do |f| %>
+<div class="box-body">
+  <div class="col-md-5">
+    <div class="form-group has-success">
+      <label>Market</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-bank"></i>
+        </div>
+        <%= f.select(:market_id, current_user.markets.map {|x| ["#{x.type} #{x.symbols}", x.id] }, {prompt:'选择交易所'}, {:class => 'form-control'}) %>
+      </div>
+    </div>
+    <div class="form-group has-success">
+      <label>Title</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-bookmark"></i>
+        </div>
+        <%= f.text_field :title, class:'form-control', placeholder:'（必填* 持仓周期标题）' %>
+      </div>
+      <%= model_errors(@position_cycle,'title') %>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <hr>
+    <div>
+      <button type="submit" class="btn bg-maroon btn-flat" style="width: 120px">提交</button>
+      <a href="<%= request.referrer %>" class="btn bg-navy btn-flat" style="width: 120px">取消</a>
+    </div>
+  </div>
+</div>
+<% end %>
