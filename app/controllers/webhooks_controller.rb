@@ -1,7 +1,7 @@
 class WebhooksController < ApplicationController
 
   # 每天缓存用户账户资产，用于对比预警通知
-  # crontab 0 0 * * *  curl http://www.example.com/webhook/cache_balances
+  # crontab 0 0 * * *  curl http://toptrader.loogle.org/webhooks/cache_balances
   def cache_balances
     User.all.each do |usr|
       usr.markets.each do |user_market|
@@ -11,7 +11,7 @@ class WebhooksController < ApplicationController
     render text:'User balances sync successed'
   end
 
-  # crontab */10 * * * * curl http://www.example.com/webhook/cache_balances
+  # crontab */10 * * * * curl http://toptrader.loogle.org/webhooks/risk_notice
   def risk_notice
     User.all.each do |usr|
       usr_total = 0
@@ -19,8 +19,8 @@ class WebhooksController < ApplicationController
         usr_total += user_market.current_balances
       end
       usr_balance = usr.current_balance
-      usr.risk_coercion.contrast(usr_balance, usr_total)
-    end
+      usr.risk_coercion&.contrast(usr_balance, usr_total)
+    end rescue nil
     render text:'Risk notice successed'
   end
 end

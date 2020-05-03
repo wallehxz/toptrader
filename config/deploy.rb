@@ -1,8 +1,8 @@
 # config valid only for current version of Capistrano
 #lock '3.4.1'
 
-set :application, 'ExTrade'
-set :repo_url, 'https://github.com/kooogle/Exchange_Trade.git'
+set :application, 'TopTrader'
+set :repo_url, 'git@github.com:kooogle/toptrader.git'
 set :ssh_options, { keys: %w{~/.ssh/id_rsa}, forward_agent: true, auth_methods: %w(publickey) }
 set :scm, :git
 # set :format, :pretty
@@ -19,7 +19,6 @@ set :puma_init_active_record, true
 set :linked_files, %w{
   config/database.yml
   config/secrets.yml
-  config/settings.rb
 }
 
 set :linked_dirs, %w{

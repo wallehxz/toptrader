@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   has_many :cycles, class_name: 'PositionCycle'
 
   def current_balance
-    balances.current.map(&:usd_value).sum
+    balances&.current&.map(&:usd_value)&.sum
   end
 
 end
