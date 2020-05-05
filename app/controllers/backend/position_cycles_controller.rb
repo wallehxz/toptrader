@@ -7,9 +7,6 @@ class Backend::PositionCyclesController < Backend::BaseController
 
   def orders
     @orders = @position_cycle.orders.order(created_at: :asc)
-    if @position_cycle.state.closed?
-      @position_cycle.update(title: @position_cycle.orders.order(created_at: :desc).first.created_at.to_date.to_s)
-    end
   end
 
   def new; end
@@ -47,7 +44,12 @@ class Backend::PositionCyclesController < Backend::BaseController
   end
 
   def collect_orders_title
-    @position_cycle
+    if current_user.cycles
+      current_user.cycles.each do |cycle|
+        cycle.update(title: cycle.orders.order(created_at: :desc).first.created_at.to_date.to_s) if cycle.state.closed?
+      end
+    end
+    redirect_to :back
   end
 
 private

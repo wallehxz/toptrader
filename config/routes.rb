@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     resources :risk_coercions
 
     resources :position_cycles do
-      get 'collect_orders_title', on: :member
+      get 'collect_orders_title', on: :collection
       get 'orders', on: :member
     end
 

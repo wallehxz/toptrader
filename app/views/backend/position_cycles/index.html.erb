@@ -12,6 +12,7 @@
   <div class="box box-primary">
     <div class="box-header">
       <a href="<%= new_backend_position_cycle_path %>" class="btn bg-primary btn-flat"><i class="ion-plus"></i> 新增持仓</a>
+      <a href="<%= collect_orders_title_backend_position_cycles_path %>" class="btn bg-green btn-flat"><i class="fa fa-cube"></i> 周期整合</a>
       <row>
         <div class="col-sm-2">
           <select onchange="javascript:location.href = this.value;" class="form-control" style="display: inline;">
@@ -38,7 +39,7 @@
             </thead>
             <tbody>
             <% @markets.each do |market| %>
-              <% market.cycles.each do |cycle| %>
+              <% market.cycles.order(state: :desc).each do |cycle| %>
                 <tr style="text-align: center">
                   <td><br>
                     【<%= market.type %>】<%= market.symbols %>
