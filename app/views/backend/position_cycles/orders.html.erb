@@ -1,0 +1,44 @@
+<%= content_for(:title,  '周期订单 | TopTrader') %>
+<section class="content-header">
+  <h1>
+    <%= @position_cycle.market.symbols %>&nbsp;<%= @position_cycle.title %> <small>周期订单</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active"><i class="fa fa-exchange"></i> 周期订单</li>
+  </ol>
+</section>
+<section class="content">
+  <div class="box box-primary">
+    <div class="box-header">
+      <a href="<%= request.referrer %>" class="btn bg-navy btn-flat" style="width: 120px"><i class="fa fa-backward"></i>&nbsp;返回</a>
+    </div>
+    <div class="box-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+            <thead>
+              <tr>
+                <th tabindex="0" aria-controls="example1" style="text-align: center">Type</th>
+                <th tabindex="0" aria-controls="example1" style="text-align: center">Price</th>
+                <th tabindex="0" aria-controls="example1" style="text-align: center">Amount</th>
+                <th tabindex="0" aria-controls="example1" style="text-align: center">Total</th>
+                <th tabindex="0" aria-controls="example1" style="text-align: center">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @orders.each do |order| %>
+              <tr style="text-align: center">
+                <td><%= order.type %></td>
+                <td><%= order.price&.round(4) %></td>
+                <td><%= order.amount&.round(4) %></td>
+                <td><%= order.total&.round(4) %></td>
+                <td><%= order.created_at.to_s(:long) %></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

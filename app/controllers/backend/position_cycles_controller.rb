@@ -2,6 +2,14 @@ class Backend::PositionCyclesController < Backend::BaseController
 
   def index
     @markets = current_user.markets
+    @markets = @markets.where(id: params[:market]) if params[:market]
+  end
+
+  def orders
+    @orders = @position_cycle.orders.order(created_at: :asc)
+    if @position_cycle.state.closed?
+      @position_cycle.update(title: @position_cycle.orders.order(created_at: :desc).first.created_at.to_date.to_s)
+    end
   end
 
   def new; end
@@ -38,7 +46,7 @@ class Backend::PositionCyclesController < Backend::BaseController
     end
   end
 
-  def collect_orders
+  def collect_orders_title
     @position_cycle
   end
 

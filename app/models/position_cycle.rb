@@ -42,6 +42,7 @@ class PositionCycle < ActiveRecord::Base
     if bids.all.count > 0 && asks.all.count > 0
       if bids.all.map(&:amount).sum.round(2) - asks.all.map(&:amount).sum.round(2) < 0.01
         self.update(state: 'closed')
+        self.update(title: self.orders.order(created_at: :desc).first.created_at.to_date.to_s)
       end
     end
   end

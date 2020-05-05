@@ -12,6 +12,16 @@
   <div class="box box-primary">
     <div class="box-header">
       <a href="<%= new_backend_position_cycle_path %>" class="btn bg-primary btn-flat"><i class="ion-plus"></i> 新增持仓</a>
+      <row>
+        <div class="col-sm-2">
+          <select onchange="javascript:location.href = this.value;" class="form-control" style="display: inline;">
+            <option value="?">请选择市场</option>
+            <% current_user.markets.each do |item|%>
+              <option value="?market=<%= item.id%>" <%= 'selected' if params[:market] == "#{item.id}" %>><%= item.symbols %></option>
+            <% end %>
+          </select>
+        </div>
+      </row>
     </div>
     <div class="box-body">
       <div class="row">
@@ -49,6 +59,12 @@
                     </label>
                   </td>
                   <td style="text-align: center;">
+                    <a href="<%= orders_backend_position_cycle_path(cycle) %>" class="btn bg-blue btn-flat">
+                      <i class="fa fa-book"></i>
+                    </a>
+                    <a href="<%= edit_backend_position_cycle_path(cycle) %>" class="btn bg-orange btn-flat">
+                      <i class="glyphicon glyphicon-edit"></i>
+                    </a>
                     <a href="<%= backend_position_cycle_path(cycle) %>" class="btn bg-red btn-flat" data-method="delete" data-confirm="确定删除吗？">
                       <i class="glyphicon glyphicon-trash"></i>
                     </a>
